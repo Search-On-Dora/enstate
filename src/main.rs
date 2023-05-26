@@ -16,6 +16,15 @@ async fn main() {
     dotenv().ok();
 
     println!("📦 enstate.rs v{}", env!("CARGO_PKG_VERSION"));
+    match env::var("REDIS_URL") {
+        Ok(val) => println!("📦 redis v{}", val),
+        Err(_e) => println!("REDIS_URL is not defined in the .env file"),
+    }
+    
+    match env::var("RPC_URL") {
+        Ok(val) => println!("📦 rpc v{}", val),
+        Err(_e) => println!("RPC_URL is not defined in the .env file"),
+    }
 
     let state = AppState::new().await;
 
